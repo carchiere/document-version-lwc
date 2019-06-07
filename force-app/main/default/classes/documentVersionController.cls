@@ -1,8 +1,21 @@
 public with sharing class documentVersionController {
-        @AuraEnabled(Cacheable=true)
-        public static List <versionWrapper> getDocVersions(Id docId){
-        //public static List <ContentVersion> getDocVersions(Id docId){
-          system.debug(docId);
+/******************************************************************************************
+*  Description: Contoller used for documentVersion Lightning Web Component
+*
+* Modification Log:
+* -----------------------------------------------------------------------------------------
+* Mod ID      |   Date       | Mod Author       | Brief Mod Description 
+* -----------------------------------------------------------------------------------------
+* 0001        |  3/1/2019    | Cary Archiere   | Initial code creation.
+*                         
+* -----------------------------------------------------------------------------------------
+*******************************************************************************************/
+@AuraEnabled(Cacheable=true)
+
+    // passing in a document Id, return the list of version records  
+    public static List <versionWrapper> getDocVersions(Id docId){
+
+
           List<versionWrapper> versionList = new List<versionWrapper>();
           List<ContentVersion> versions= [SELECT Id, ContentDocumentId,CreatedBy.Name
           ,Owner.Name, LastModifiedBy.Name, Title,VersionNumber 
@@ -12,11 +25,11 @@ public with sharing class documentVersionController {
               system.debug(ver.OwnerName);
               versionList.add(ver);
           }
-          system.debug(versionList.size());
           return versionList;
-          //return versions;
     }
    
+   // due to an issue with the data table component, a wrapper class is needed.  Data table component will not
+   // display field values from a parent record.  
     public class versionWrapper{
         @AuraEnabled public Id Id {get;set;}
         @AuraEnabled public String VersionNumber {get;set;}
