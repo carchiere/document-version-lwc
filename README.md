@@ -7,7 +7,7 @@ versionList Lightning Web Component
 
 
 ## Description of Files and Directories
-Lightning Web Compoonent prototype using an Apex class to return Content Document Version data.  
+Lightning Web Component using an Apex class to return Content Document Version data.  
 
 ## Issues
 
